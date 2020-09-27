@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpForce = 20f;
 
     //2. State -  
-    bool isAlive = true;
+    // bool isAlive = true;                 /* commenting this because it makes a warning */
 
     //3. Cache component references
     Rigidbody2D myRigidBody;
