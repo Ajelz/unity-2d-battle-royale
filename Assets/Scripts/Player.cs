@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     // 1. Config - always put config (anything to do with before starting playing)
     [SerializeField] float runSpeed = 8f;
-    [SerializeField] float jumpSpeed = 40f;
+    [SerializeField] float jumpForce = 40f;
 
     //2. State -  
     bool isAlive = true;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         if(!myFeet.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
 
         if (CrossPlatformInputManager.GetButtonDown("Jump")) {
-            Vector2 jumpVelocityToAdd = new Vector2(0f, jumpSpeed);
+            Vector2 jumpVelocityToAdd = new Vector2(0f, jumpForce);
             myRigidBody.velocity += jumpVelocityToAdd;
             print("Jumping");
         }
