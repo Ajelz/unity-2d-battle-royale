@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     // 1. Config - always put config (anything to do with before starting playing)
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float jumpForce = 20f;
+    [SerializeField] float climbSpeed = 8f;
 
     //2. State -  
     // bool isAlive = true;                 /* commenting this because it makes a warning */
@@ -17,16 +18,18 @@ public class Player : MonoBehaviour
     //3. Cache component references
     Rigidbody2D myRigidBody;
     Animator myAnimator;
-    CapsuleCollider2D myBody2D;
+    PolygonCollider2D myBody2D;
     BoxCollider2D myFeet;
+    float gravityScaleAtStart;
 
     // Messages then methods
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myBody2D = GetComponent<CapsuleCollider2D>();
+        myBody2D = GetComponent<PolygonCollider2D>();
         myFeet = GetComponent<BoxCollider2D>();
+        gravityScaleAtStart = myRigidBody.gravityScale;
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
     {
         Run();
         Jump();
+        ClimbLadder();
         // FlipSprite();
     }
 
@@ -49,6 +53,20 @@ public class Player : MonoBehaviour
         // {
         //     myAnimator.SetBool("Running", playerHasHorizontalSpeed); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
         // }
+    }
+
+    private void ClimbLadder()
+    {
+        if (!myBody2D.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        {
+            myRigidBody.gravityScale = gravityScaleAtStart;
+            return;
+        }
+
+        float controlThrow = CrossPlatformInputManager.GetAxis("Vertical");
+        Vector2 climbVelocity = new Vector2(myRigidBody.velocity.x, controlThrow * climbSpeed);
+        myRigidBody.velocity = climbVelocity;
+        myRigidBody.gravityScale = 0f;
     }
 
     private void Jump()
