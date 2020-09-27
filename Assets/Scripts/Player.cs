@@ -20,8 +20,6 @@ public class Player : MonoBehaviour
     CapsuleCollider2D myBody2D;
     BoxCollider2D myFeet;
 
-
-
     // Messages then methods
     void Start()
     {
