@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 
     // 1. Config - always put config (anything to do with before starting playing)
     [SerializeField] float runSpeed = 8f;
-    [SerializeField] float jumpForce = 40f;
+    [SerializeField] float jumpForce = 20f;
 
     //2. State -  
     bool isAlive = true;
