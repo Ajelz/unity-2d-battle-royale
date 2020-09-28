@@ -17,7 +17,7 @@ public class OldPlayer : MonoBehaviour
 
     //3. Cache component references
     Rigidbody2D myOldRigidBody;
-    Animator myOldAnimator;
+    // Animator myOldAnimator;
     CapsuleCollider2D myOldBody2D;
     BoxCollider2D myOldFeet;
     float gravityScaleAtStart;
@@ -26,7 +26,7 @@ public class OldPlayer : MonoBehaviour
     void Start()
     {
         myOldRigidBody = GetComponent<Rigidbody2D>();
-        myOldAnimator = GetComponent<Animator>();
+        // myOldAnimator = GetComponent<Animator>();
         myOldBody2D = GetComponent<CapsuleCollider2D>();
         myOldFeet = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = myOldRigidBody.gravityScale;
@@ -38,7 +38,7 @@ public class OldPlayer : MonoBehaviour
         Run();
         Jump();
         ClimbLadder();
-        FlipSprite();
+        // FlipSprite();
     }
 
     private void Run()
@@ -48,19 +48,19 @@ public class OldPlayer : MonoBehaviour
         myOldRigidBody.velocity = playerVelocity;
 
 
-         bool playerHasHorizontalSpeed = Mathf.Abs(myOldRigidBody.velocity.x) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed) // To run the running animation
-        {
-            myOldAnimator.SetBool("Running", true); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
-        }
-        else myOldAnimator.SetBool("Running", false);
+        // bool playerHasHorizontalSpeed = Mathf.Abs(myOldRigidBody.velocity.x) > Mathf.Epsilon;
+        // if (playerHasHorizontalSpeed) // To run the running animation
+        // {
+        //     myOldAnimator.SetBool("Running", true); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
+        // }
+        // else myOldAnimator.SetBool("Running", false);
     }
 
     private void ClimbLadder()
     {
         if (!myOldFeet.IsTouchingLayers(LayerMask.GetMask("Climbing")))
         {
-            myOldAnimator.SetBool("Climbing", false);
+            // myOldAnimator.SetBool("Climbing", false);
             myOldRigidBody.gravityScale = gravityScaleAtStart;
             return;
         }
@@ -71,7 +71,7 @@ public class OldPlayer : MonoBehaviour
         myOldRigidBody.gravityScale = 0f;
 
         bool playerHasVerticalSpeed = Mathf.Abs(myOldRigidBody.velocity.y) > Mathf.Epsilon;
-        myOldAnimator.SetBool("Climbing", playerHasVerticalSpeed);
+        // myOldAnimator.SetBool("Climbing", playerHasVerticalSpeed);
     }
 
     private void Jump()
@@ -85,12 +85,12 @@ public class OldPlayer : MonoBehaviour
         }
     }
 
-     private void FlipSprite()
-     {
-         bool playerHasHorizontalSpeed = Mathf.Abs(myOldRigidBody.velocity.x) > Mathf.Epsilon;
-         if (playerHasHorizontalSpeed)
-         {
-             transform.localScale = new Vector2(Mathf.Sign(myOldRigidBody.velocity.x), 1f);
-         }
-     }
+    //  private void FlipSprite()
+    //  {
+    //      bool playerHasHorizontalSpeed = Mathf.Abs(myOldRigidBody.velocity.x) > Mathf.Epsilon;
+    //      if (playerHasHorizontalSpeed)
+    //      {
+    //          transform.localScale = new Vector2(Mathf.Sign(myOldRigidBody.velocity.x), 1f);
+    //      }
+    //  }
 }
