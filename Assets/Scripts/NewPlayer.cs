@@ -35,7 +35,8 @@ public class NewPlayer : MonoBehaviour
     {
         move();
         jump();
-        animationAndFlip();
+        objectAnimation();
+        objectFlip();
     }
 
     private void move(){
@@ -50,16 +51,15 @@ public class NewPlayer : MonoBehaviour
         }
     }
 
-    private void animationAndFlip(){
-        if (objectRigidbody2D.velocity.x > 0) {
-            objectAnimator.SetBool("running", true);
-            objectSpriteRenderer.flipX = false;
-        }else if(objectRigidbody2D.velocity.x == 0){
-            objectAnimator.SetBool("running", false);
-        }else{
-            objectAnimator.SetBool("running", true);
-            objectSpriteRenderer.flipX = true;
-        }
+    private void objectAnimation(){
+        bool playerHasHorizontalSpeed = Mathf.Abs(objectRigidbody2D.velocity.x) > Mathf.Epsilon;
+        if (playerHasHorizontalSpeed) objectAnimator.SetBool("running", true); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
+        else objectAnimator.SetBool("running", false);
+    }
+
+    private void objectFlip(){
+        if(objectRigidbody2D.velocity.x > 0) objectSpriteRenderer.flipX = false;
+        else if(objectRigidbody2D.velocity.x < 0) objectSpriteRenderer.flipX = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
