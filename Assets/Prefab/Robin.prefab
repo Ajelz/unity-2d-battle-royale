@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 4945144938486724}
   - component: {fileID: 95064450066878726}
   - component: {fileID: 114038265200894082}
+  - component: {fileID: 2115787384}
   m_Layer: 0
   m_Name: Animation
   m_TagString: Untagged
@@ -507,6 +508,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07a219f3f28a3014ca16bf6b2f13111f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2115787384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067874820758160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8cbf7c87c8062c47ab320f4b8333bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1082958961287148
@@ -1295,8 +1308,8 @@ GameObject:
   - component: {fileID: 1508436722}
   - component: {fileID: 1508436720}
   - component: {fileID: 1508436721}
-  - component: {fileID: 1508436723}
   - component: {fileID: 1508436719}
+  - component: {fileID: 243860816}
   m_Layer: 0
   m_Name: Robin
   m_TagString: Untagged
@@ -1313,7 +1326,7 @@ Transform:
   m_GameObject: {fileID: 1168892492390734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.5, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4945144938486724}
   m_Father: {fileID: 0}
@@ -1678,25 +1691,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.051509857, y: 1.3439307}
   m_Size: {x: 1.4426594, y: 2.9872026}
   m_Direction: 0
---- !u!95 &1508436723
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168892492390734}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3e315a7ba30144f9b95dfeb0cc4291d5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1508436719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1712,6 +1706,25 @@ MonoBehaviour:
   runSpeed: 8
   jumpForce: 20
   climbSpeed: 8
+  crouchSpeed: 4
+  isCrouch: 0
+--- !u!114 &243860816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168892492390734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4239645ed24cc4dac6c8e07460b969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCrouched: 0
+  controller: {fileID: 0}
+  crouchDistance: 0.9
+  crouchingSpeed: 0.7
+  isChangingPosition: 0
 --- !u!1 &1179323946161564
 GameObject:
   m_ObjectHideFlags: 0
