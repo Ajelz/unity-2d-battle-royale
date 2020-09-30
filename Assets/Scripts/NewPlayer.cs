@@ -17,6 +17,8 @@ public class NewPlayer : MonoBehaviour
     Rigidbody2D objectRigidbody2D;
     CapsuleCollider2D objectCapsuleCollider2D;
     BoxCollider2D objectBoxCollider2D;
+    Animator objectAnimator;
+    SpriteRenderer objectSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,8 @@ public class NewPlayer : MonoBehaviour
         objectRigidbody2D = GetComponent<Rigidbody2D>();
         objectCapsuleCollider2D = GetComponent<CapsuleCollider2D>();
         objectBoxCollider2D = GetComponent<BoxCollider2D>();
+        objectAnimator = GetComponent<Animator>();
+        objectSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -31,6 +35,7 @@ public class NewPlayer : MonoBehaviour
     {
         move();
         jump();
+        animationAndFlip();
     }
 
     private void move(){
@@ -42,6 +47,18 @@ public class NewPlayer : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Jump") && isOnFloor) {
             objectRigidbody2D.velocity += new Vector2(0f, jumpForce);
             isOnFloor = false;
+        }
+    }
+
+    private void animationAndFlip(){
+        if (objectRigidbody2D.velocity.x > 0) {
+            objectAnimator.SetBool("running", true);
+            objectSpriteRenderer.flipX = false;
+        }else if(objectRigidbody2D.velocity.x == 0){
+            objectAnimator.SetBool("running", false);
+        }else{
+            objectAnimator.SetBool("running", true);
+            objectSpriteRenderer.flipX = true;
         }
     }
 
