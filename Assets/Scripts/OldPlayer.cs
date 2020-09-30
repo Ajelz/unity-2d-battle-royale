@@ -11,22 +11,22 @@ public class OldPlayer : MonoBehaviour
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float jumpForce = 20f;
     [SerializeField] float climbSpeed = 8f;
+    [SerializeField] float crouchSpeed = 4f;
+    [SerializeField] bool isCrouch = false;
 
     //2. State -  
     // bool isAlive = true;                 /* commenting this because it makes a warning */
 
     //3. Cache component references
     Rigidbody2D myOldRigidBody;
-    // Animator myOldAnimator;
     CapsuleCollider2D myOldBody2D;
     BoxCollider2D myOldFeet;
     float gravityScaleAtStart;
 
     // Messages then methods
-    void Start()
+    void Awake()
     {
         myOldRigidBody = GetComponent<Rigidbody2D>();
-        // myOldAnimator = GetComponent<Animator>();
         myOldBody2D = GetComponent<CapsuleCollider2D>();
         myOldFeet = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = myOldRigidBody.gravityScale;
@@ -38,29 +38,47 @@ public class OldPlayer : MonoBehaviour
         Run();
         Jump();
         ClimbLadder();
+        Crouch();
         // FlipSprite();
     }
 
+
+    private void Crouch()
+    {
+        if (CrossPlatformInputManager.GetButtonDown("left shift"))
+        {
+            isCrouch = true;
+        }
+        if (CrossPlatformInputManager.GetButtonUp("left shift"))
+        {
+            isCrouch = false;
+        }
+
+
+    }
+
+
     private void Run()
     {
-        float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal"); // the value can be from -1 to 1
-        Vector2 playerVelocity = new Vector2(controlThrow * runSpeed, myOldRigidBody.velocity.y);
-        myOldRigidBody.velocity = playerVelocity;
+        Vector2 playerVelocity = new Vector2(myOldRigidBody.velocity.x,myOldRigidBody.velocity.y);
+        float controlThrow = 0f;
+        controlThrow = CrossPlatformInputManager.GetAxis("Horizontal"); // the value can be from -1 to 1
+        if (!isCrouch)
+        {
+            playerVelocity = new Vector2(controlThrow * runSpeed, myOldRigidBody.velocity.y);
+            myOldRigidBody.velocity = playerVelocity;
+        } else
+        {
+            playerVelocity = new Vector2(controlThrow * crouchSpeed, myOldRigidBody.velocity.y);
+            myOldRigidBody.velocity = playerVelocity;
+        }
 
-
-        // bool playerHasHorizontalSpeed = Mathf.Abs(myOldRigidBody.velocity.x) > Mathf.Epsilon;
-        // if (playerHasHorizontalSpeed) // To run the running animation
-        // {
-        //     myOldAnimator.SetBool("Running", true); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
-        // }
-        // else myOldAnimator.SetBool("Running", false);
     }
 
     private void ClimbLadder()
     {
-        if (!myOldFeet.IsTouchingLayers(LayerMask.GetMask("Climbing")))
+        if (!myOldFeet.IsTouchingLayers(LayerMask.GetMask("Climb")))
         {
-            // myOldAnimator.SetBool("Climbing", false);
             myOldRigidBody.gravityScale = gravityScaleAtStart;
             return;
         }
@@ -70,8 +88,6 @@ public class OldPlayer : MonoBehaviour
         myOldRigidBody.velocity = climbVelocity;
         myOldRigidBody.gravityScale = 0f;
 
-        bool playerHasVerticalSpeed = Mathf.Abs(myOldRigidBody.velocity.y) > Mathf.Epsilon;
-        // myOldAnimator.SetBool("Climbing", playerHasVerticalSpeed);
     }
 
     private void Jump()
