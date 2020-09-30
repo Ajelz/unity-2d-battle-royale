@@ -45,23 +45,35 @@ public class AnimationTrigger : MonoBehaviour
 
     void Crouch()
     {
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigid.velocity.x) > 0;
+        if (playerHasHorizontalSpeed)
+        {
+            myOldAnimator.SetBool("Crouch", false);
+        }
         if (CrossPlatformInputManager.GetButtonDown("left shift"))
         {
             myOldAnimator.SetBool("Crouch", true);
             print("shifting");
         }
-        if (CrossPlatformInputManager.GetButtonUp("left shift"))
+        else if (CrossPlatformInputManager.GetButtonUp("left shift"))
         {
             myOldAnimator.SetBool("Crouch", false);
         }
+
     }
     void JumpCheck()
     {
-        if (!myBox.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigid.velocity.x) > 0;
+        if (!playerHasHorizontalSpeed)
         {
-            myOldAnimator.SetBool("Jump", true);
+            if (!myBox.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            {
+                myOldAnimator.SetBool("Jump", true);
+            }
+            else myOldAnimator.SetBool("Jump", false);
         }
-        else myOldAnimator.SetBool("Jump", false);
+        else
+            myOldAnimator.SetBool("Jump", false);
     }
     private void ClimbCheck()
     {
