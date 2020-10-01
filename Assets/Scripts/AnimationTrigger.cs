@@ -68,7 +68,7 @@ public class AnimationTrigger : MonoBehaviour
 
     void Crouch()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigid.velocity.x) > 0;
+        bool playerHasHorizontalSpeed = Mathf.Abs(myRigid.velocity.x) > 1;
         if (playerHasHorizontalSpeed)
         {
             myOldAnimator.SetBool("Crouch", false);

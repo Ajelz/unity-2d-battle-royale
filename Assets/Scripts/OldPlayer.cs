@@ -19,15 +19,15 @@ public class OldPlayer : MonoBehaviour
 
     //3. Cache component references
     Rigidbody2D myOldRigidBody;
-    CapsuleCollider2D myOldBody2D;
     BoxCollider2D myOldFeet;
+    PolygonCollider2D myPolyCollider;
     float gravityScaleAtStart;
 
     // Messages then methods
     void Awake()
     {
+        myPolyCollider = GetComponent<PolygonCollider2D>();
         myOldRigidBody = GetComponent<Rigidbody2D>();
-        myOldBody2D = GetComponent<CapsuleCollider2D>();
         myOldFeet = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = myOldRigidBody.gravityScale;
     }
@@ -42,6 +42,13 @@ public class OldPlayer : MonoBehaviour
             ClimbLadder();
             Crouch();
         }
+        else
+        {
+            Destroy(gameObject.GetComponent<PolygonCollider2D>());
+            //Destroy(gameObject.GetComponent<BoxCollider2D>();
+            Destroy(gameObject, 0.80f); // OPTIONAL
+        }
+
         // FlipSprite();
     }
 

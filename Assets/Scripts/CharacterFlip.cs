@@ -35,8 +35,6 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public void Update()
         {
             bool isAlive = myTestBar.LifeStatus();
-
-
             if (isAlive)
             {
                 var scale = transform.localScale;

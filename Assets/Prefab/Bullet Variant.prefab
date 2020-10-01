@@ -9,6 +9,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1681781652526772, guid: ee5a35562afa4d73b64cd5b1d3fb168c, type: 3}
       propertyPath: m_Name
+      value: Bullet Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681781652526772, guid: ee5a35562afa4d73b64cd5b1d3fb168c, type: 3}
+      propertyPath: m_TagString
       value: Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 4317019958060258, guid: ee5a35562afa4d73b64cd5b1d3fb168c, type: 3}
