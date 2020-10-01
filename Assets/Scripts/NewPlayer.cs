@@ -52,8 +52,8 @@ public class NewPlayer : MonoBehaviour
     }
 
     private void objectAnimation(){
-        bool playerHasHorizontalSpeed = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed) objectAnimator.SetBool("running", true); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
+        if (CrossPlatformInputManager.GetButton("left")) objectAnimator.SetBool("running", true);
+        else if (CrossPlatformInputManager.GetButton("right")) objectAnimator.SetBool("running", true);
         else objectAnimator.SetBool("running", false);
     }
 
@@ -63,7 +63,6 @@ public class NewPlayer : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        print(other.gameObject.name);
         if(other.gameObject.name == "Floor"){
             isOnFloor = true;
         }
