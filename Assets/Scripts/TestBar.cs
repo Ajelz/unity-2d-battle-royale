@@ -5,11 +5,18 @@ using UnityEngine;
 public class TestBar : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currentHealth;
+    public int currentHealth = 0;
     [SerializeField] HealthBar healthBar;
+    bool isAlive;
+
+    Rigidbody2D myRigid;
+    OldPlayer myPlayer;
     // Start is called before the first frame update
     void Start()
     {
+        isAlive = true;
+        myPlayer = GetComponent <OldPlayer>();
+        myRigid = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -21,6 +28,8 @@ public class TestBar : MonoBehaviour
         {
             TakeDamage(5);
         }
+        Death();
+        LifeStatus();
     }
 
     void TakeDamage(int damage)
@@ -28,5 +37,23 @@ public class TestBar : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.setHealth(currentHealth);
+    }
+
+    public bool LifeStatus()
+    {
+        isAlive = myPlayer.isPlayerAlive();
+        return isAlive;
+    }
+
+    void Death()
+    {
+        if (currentHealth <= 0)
+        {
+            myPlayer.setIsAlive(false);
+        }
+        else
+        {
+            myPlayer.setIsAlive(true);
+        }
     }
 }

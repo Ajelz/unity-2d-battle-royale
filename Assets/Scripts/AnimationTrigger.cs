@@ -9,12 +9,15 @@ public class AnimationTrigger : MonoBehaviour
 
     Transform myRigidParent;
     Transform myBoxParent;
+    Transform myTestBarParent;
+    TestBar myTestBar;
     Rigidbody2D myRigid;
     BoxCollider2D myBox;
     Animator myOldAnimator;
     // Start is called before the first frame update
     void Start()
     {
+        myTestBar = GetComponent<TestBar>();
         myRigid = GetComponent<Rigidbody2D>();
         myOldAnimator = GetComponent<Animator>();
         myBox = GetComponent<BoxCollider2D>();
@@ -23,6 +26,8 @@ public class AnimationTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        myTestBarParent = transform.parent;
+        myTestBar = myTestBarParent.GetComponent<TestBar>();
         myRigidParent = transform.parent;
         myRigid = myRigidParent.GetComponent<Rigidbody2D>();
         myBoxParent = transform.parent;
@@ -31,8 +36,26 @@ public class AnimationTrigger : MonoBehaviour
         JumpCheck();
         ClimbCheck();
         Crouch();
+        LifeCheck();
     }
 
+    public void LifeCheck()
+    {
+        bool isAlive = myTestBar.LifeStatus();
+        int random = Random.Range(0, 2);
+        if (!isAlive)
+        {
+            if (random == 0)
+                myOldAnimator.SetBool("DieBack", true);
+            else if (random == 1)
+                myOldAnimator.SetBool("DieFront", true);
+        }
+        else
+        {
+            myOldAnimator.SetBool("DieBack", false);
+            myOldAnimator.SetBool("DieFront", false);
+        }
+    }
     void RunCheck()
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(myRigid.velocity.x) > 1;

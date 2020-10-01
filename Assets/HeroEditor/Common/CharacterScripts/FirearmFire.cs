@@ -6,6 +6,7 @@ using Assets.MilitaryHeroes.Scripts.Enums;
 using HeroEditor.Common.Enums;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 namespace Assets.HeroEditor.Common.CharacterScripts
 {
@@ -192,11 +193,22 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 var bullet = Instantiate(Character.Firearm.Params.ProjectilePrefab, Character.Firearm.FireTransform);
                 var spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
 
+                if (CrossPlatformInputManager.GetButton("left shift"))
+                {
+                    spread = Character.Firearm.FireTransform.up * Random.Range(-0.25f, 0.25f) * (1 - Character.Firearm.Params.Accuracy); // CONTROLLED SPREAD BULLETS
+                }
+                else if (CrossPlatformInputManager.GetButtonUp("left shift"))
+                {
+                    spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
+                }
+                else
+                    spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
+
                 bullet.transform.localPosition = Vector3.zero;
                 bullet.transform.localRotation = Quaternion.identity;
                 bullet.transform.SetParent(null);
                 bullet.GetComponent<SpriteRenderer>().sprite = Character.Firearms.Single(j => j.name == "Bullet");
-                bullet.GetComponent<Rigidbody>().velocity = Character.Firearm.Params.MuzzleVelocity * (Character.Firearm.FireTransform.right + spread)
+                bullet.GetComponent<Rigidbody2D>().velocity = Character.Firearm.Params.MuzzleVelocity * (Character.Firearm.FireTransform.right + spread)
                     * Mathf.Sign(Character.transform.lossyScale.x) * Random.Range(0.85f, 1.15f);
 
                 var sortingOrder = Character.FirearmsRenderers.Single(j => j.name == "Rifle").sortingOrder;
@@ -206,15 +218,15 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                     r.sortingOrder = sortingOrder;
                 }
 
-                var ignoreCollider = Character.GetComponent<Collider>();
+                var ignoreCollider = Character.GetComponent<Collider2D>();
 
                 if (ignoreCollider != null)
                 {
-                    Physics.IgnoreCollision(bullet.GetComponent<Collider>(), ignoreCollider);
+                    Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), ignoreCollider);
                 }
 
                 bullet.gameObject.layer = 31; // TODO: Create layer in your project and disable collision for it (in psysics settings)
-                Physics.IgnoreLayerCollision(31, 31, true);
+                Physics2D.IgnoreLayerCollision(31, 31, true);
             }
         }
 
