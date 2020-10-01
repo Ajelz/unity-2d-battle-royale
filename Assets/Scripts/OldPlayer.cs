@@ -15,7 +15,7 @@ public class OldPlayer : MonoBehaviour
     [SerializeField] bool isCrouch = false;
 
     //2. State -  
-    // bool isAlive = true;                 /* commenting this because it makes a warning */
+     bool isAlive = true;
 
     //3. Cache component references
     Rigidbody2D myOldRigidBody;
@@ -35,13 +35,20 @@ public class OldPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Run();
-        Jump();
-        ClimbLadder();
-        Crouch();
+        if (isAlive)
+        {
+            Run();
+            Jump();
+            ClimbLadder();
+            Crouch();
+        }
         // FlipSprite();
     }
 
+    public bool isPlayerAlive()
+    {
+        return isAlive;
+    }
 
     private void Crouch()
     {
@@ -98,6 +105,18 @@ public class OldPlayer : MonoBehaviour
             Vector2 jumpVelocityToAdd = new Vector2(0f, jumpForce);
             myOldRigidBody.velocity += jumpVelocityToAdd;
             print("Jumping");
+        }
+    }
+
+    public void setIsAlive(bool alive)
+    {
+        if (alive)
+        {
+            isAlive = true;
+        }
+        else
+        {
+            isAlive = false;
         }
     }
 
