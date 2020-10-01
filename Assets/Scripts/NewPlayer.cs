@@ -40,7 +40,7 @@ public class NewPlayer : MonoBehaviour
     }
 
     private void move(){
-        float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal"); // the value can be from -1 to 1
+        float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal");
         objectRigidbody2D.velocity = new Vector2(controlThrow * runSpeed, objectRigidbody2D.velocity.y);
     }
 
@@ -52,7 +52,7 @@ public class NewPlayer : MonoBehaviour
     }
 
     private void objectAnimation(){
-        bool playerHasHorizontalSpeed = Mathf.Abs(objectRigidbody2D.velocity.x) > Mathf.Epsilon;
+        bool playerHasHorizontalSpeed = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > Mathf.Epsilon;
         if (playerHasHorizontalSpeed) objectAnimator.SetBool("running", true); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
         else objectAnimator.SetBool("running", false);
     }
