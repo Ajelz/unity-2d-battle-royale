@@ -13,11 +13,9 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public GameObject Trail;
         public GameObject Impact;
 	    public Rigidbody2D myRigidbody;
-        Vector3 speed;
 
         public void Start()
         {
-            speed = new Vector3(100, 0, 0);
             Destroy(gameObject, 5);
         }
 	    public void Update()
@@ -32,13 +30,18 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public void OnTriggerEnter2D(Collider2D other)
         {
             Bang(other.gameObject);
-            print("banged yes?" + other.gameObject);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                TestBar myTestBar = other.GetComponent<TestBar>();
+                myTestBar.TakeDamage(5);
+            }
+            //print("banged yes?" + other.gameObject);
         }
 
-       //public void OnCollisionEnter2D(Collision2D other)
-       //{
-       //    Bang(other.gameObject);
-       //}
+     // public void OnCollisionEnter2D(Collision2D other)
+     // {
+     //     Bang(other.gameObject); //DISABLED CUZ NOT NEEDED
+     // }
 
         private void Bang(GameObject other)
         {

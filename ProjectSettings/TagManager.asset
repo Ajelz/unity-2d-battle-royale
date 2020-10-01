@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - theParent
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -18,8 +19,8 @@ TagManager:
   - Climbing
   - Player
   - Background
-  - Hazards
-  - 
+  - Environment
+  - Obstacles
   - 
   - 
   - 
@@ -51,7 +52,7 @@ TagManager:
   - name: Climbing
     uniqueID: 782578687
     locked: 0
-  - name: Hazards
+  - name: Environment
     uniqueID: 3717421697
     locked: 0
   - name: Player
