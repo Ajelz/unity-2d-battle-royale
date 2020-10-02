@@ -10,8 +10,7 @@ public class NewPlayer : MonoBehaviour
     [SerializeField] float jumpForce = 40f;
 
     //2. State -  
-    bool isOnFloor = false;
-    // bool isAlive = true;              /* commenting this because it makes a warning */
+    public bool isOnFloor = false;
 
     //3. Cache component references
     Rigidbody2D objectRigidbody2D;
@@ -33,26 +32,27 @@ public class NewPlayer : MonoBehaviour
     {
         move();
         jump();
-        objectAnimation();
         objectFlip();
     }
 
     private void move(){
         float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal");
         objectRigidbody2D.velocity = new Vector2(controlThrow * runSpeed, objectRigidbody2D.velocity.y);
+
+        // for running animation
+        if (CrossPlatformInputManager.GetButton("left")) objectAnimator.SetBool("isRunning", true);
+        else if (CrossPlatformInputManager.GetButton("right")) objectAnimator.SetBool("isRunning", true);
+        else objectAnimator.SetBool("isRunning", false);
     }
 
     private void jump(){
         if (CrossPlatformInputManager.GetButtonDown("Jump") && isOnFloor) {
             objectRigidbody2D.velocity += new Vector2(0f, jumpForce);
             isOnFloor = false;
-        }
-    }
 
-    private void objectAnimation(){
-        if (CrossPlatformInputManager.GetButton("left")) objectAnimator.SetBool("running", true);
-        else if (CrossPlatformInputManager.GetButton("right")) objectAnimator.SetBool("running", true);
-        else objectAnimator.SetBool("running", false);
+            // for jumping animation
+            objectAnimator.SetBool("isJumping", true);
+        }
     }
 
     private void objectFlip(){
@@ -61,8 +61,11 @@ public class NewPlayer : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.name == "Floor"){
+        if(other.gameObject.tag == "Ground"){
             isOnFloor = true;
+
+            // for jumping animation
+            objectAnimator.SetBool("isJumping", false);
         }
     }
 }
