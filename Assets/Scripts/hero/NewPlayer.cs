@@ -18,7 +18,6 @@ public class NewPlayer : MonoBehaviour
     CapsuleCollider2D objectCapsuleCollider2D;
     BoxCollider2D objectBoxCollider2D;
     Animator objectAnimator;
-    SpriteRenderer objectSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +26,6 @@ public class NewPlayer : MonoBehaviour
         objectCapsuleCollider2D = GetComponent<CapsuleCollider2D>();
         objectBoxCollider2D = GetComponent<BoxCollider2D>();
         objectAnimator = GetComponent<Animator>();
-        objectSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -58,11 +56,11 @@ public class NewPlayer : MonoBehaviour
     }
 
     private void objectFlip(){
-        if(objectRigidbody2D.velocity.x > 0) objectSpriteRenderer.flipX = false;
-        else if(objectRigidbody2D.velocity.x < 0) objectSpriteRenderer.flipX = true;
+        if(objectRigidbody2D.velocity.x > 0) transform.eulerAngles = new Vector3(0, 0, 0);
+        else if(objectRigidbody2D.velocity.x < 0) transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.name == "Floor"){
             isOnFloor = true;
         }
