@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.HeroEditor.Common.CharacterScripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets;
@@ -20,19 +21,16 @@ public class OldPlayer : MonoBehaviour
     //3. Cache component references
     Rigidbody2D myOldRigidBody;
     BoxCollider2D myOldFeet;
-    PolygonCollider2D myPolyCollider;
     float gravityScaleAtStart;
 
     // Messages then methods
     void Awake()
     {
-        myPolyCollider = GetComponent<PolygonCollider2D>();
         myOldRigidBody = GetComponent<Rigidbody2D>();
         myOldFeet = GetComponent<BoxCollider2D>();
         gravityScaleAtStart = myOldRigidBody.gravityScale;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isAlive)
@@ -45,8 +43,8 @@ public class OldPlayer : MonoBehaviour
         else
         {
             Destroy(gameObject.GetComponent<PolygonCollider2D>());
-            //Destroy(gameObject.GetComponent<BoxCollider2D>();
-            Destroy(gameObject, 0.80f); // OPTIONAL
+            Destroy(gameObject.GetComponentInChildren<FirearmFire>());
+            //Destroy(gameObject, 1f); // OPTIONAL
         }
 
         // FlipSprite();
@@ -111,7 +109,6 @@ public class OldPlayer : MonoBehaviour
         if (CrossPlatformInputManager.GetButtonDown("Jump")) {
             Vector2 jumpVelocityToAdd = new Vector2(0f, jumpForce);
             myOldRigidBody.velocity += jumpVelocityToAdd;
-            print("Jumping");
         }
     }
 

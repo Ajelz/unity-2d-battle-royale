@@ -9,15 +9,15 @@ public class AnimationTrigger : MonoBehaviour
 
     Transform myRigidParent;
     Transform myBoxParent;
-    Transform myTestBarParent;
-    TestBar myTestBar;
+    Transform myUserHealthbarParent;
+    userHealthbar myUserHealthbar;
     Rigidbody2D myRigid;
     BoxCollider2D myBox;
     Animator myOldAnimator;
     // Start is called before the first frame update
     void Start()
     {
-        myTestBar = GetComponent<TestBar>();
+        myUserHealthbar = GetComponent<userHealthbar>();
         myRigid = GetComponent<Rigidbody2D>();
         myOldAnimator = GetComponent<Animator>();
         myBox = GetComponent<BoxCollider2D>();
@@ -26,8 +26,8 @@ public class AnimationTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        myTestBarParent = transform.parent;
-        myTestBar = myTestBarParent.GetComponent<TestBar>();
+        myUserHealthbarParent = transform.parent;
+        myUserHealthbar = myUserHealthbarParent.GetComponent<userHealthbar>();
         myRigidParent = transform.parent;
         myRigid = myRigidParent.GetComponent<Rigidbody2D>();
         myBoxParent = transform.parent;
@@ -41,7 +41,7 @@ public class AnimationTrigger : MonoBehaviour
 
     public void LifeCheck()
     {
-        bool isAlive = myTestBar.LifeStatus();
+        bool isAlive = myUserHealthbar.LifeStatus();
         int random = Random.Range(0, 2);
         if (!isAlive)
         {
@@ -68,17 +68,24 @@ public class AnimationTrigger : MonoBehaviour
 
     void Crouch()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(myRigid.velocity.x) > 1;
-        if (playerHasHorizontalSpeed)
+        //bool playerHasHorizontalSpeed = Mathf.Abs(myRigid.velocity.x) > 1;
+        //if (playerHasHorizontalSpeed)
+        //{
+        //    myOldAnimator.SetBool("Crouch", false);
+        //}
+        bool isAlive = myUserHealthbar.LifeStatus();
+        if (isAlive)
         {
-            myOldAnimator.SetBool("Crouch", false);
-        }
-        if (CrossPlatformInputManager.GetButtonDown("left shift"))
-        {
-            myOldAnimator.SetBool("Crouch", true);
-            print("shifting");
-        }
-        else if (CrossPlatformInputManager.GetButtonUp("left shift"))
+            if (CrossPlatformInputManager.GetButtonDown("left shift"))
+            {
+                myOldAnimator.SetBool("Crouch", true);
+                print("shifting");
+            }
+            else if (CrossPlatformInputManager.GetButtonUp("left shift"))
+            {
+                myOldAnimator.SetBool("Crouch", false);
+            }
+        } else
         {
             myOldAnimator.SetBool("Crouch", false);
         }
