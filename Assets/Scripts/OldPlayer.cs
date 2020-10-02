@@ -16,7 +16,7 @@ public class OldPlayer : MonoBehaviour
     [SerializeField] bool isCrouch = false;
 
     //2. State -  
-     bool isAlive = true;
+    bool isAlive = true;
 
     //3. Cache component references
     Rigidbody2D myOldRigidBody;
@@ -72,7 +72,7 @@ public class OldPlayer : MonoBehaviour
 
     private void Run()
     {
-        Vector2 playerVelocity = new Vector2(myOldRigidBody.velocity.x,myOldRigidBody.velocity.y);
+        Vector2 playerVelocity = new Vector2(myOldRigidBody.velocity.x, myOldRigidBody.velocity.y);
         float controlThrow = 0f;
         controlThrow = CrossPlatformInputManager.GetAxis("Horizontal"); // the value can be from -1 to 1
         if (!isCrouch)
@@ -104,7 +104,20 @@ public class OldPlayer : MonoBehaviour
 
     private void Jump()
     {
-        if(!myOldFeet.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        if (!myOldFeet.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        { 
+            if (myOldFeet.IsTouchingLayers(LayerMask.GetMask("Player")))
+            {
+                if (CrossPlatformInputManager.GetButtonDown("Jump"))
+                {
+                    Vector2 jumpVelocityToAdd = new Vector2(0f, jumpForce);
+                    myOldRigidBody.velocity += jumpVelocityToAdd;
+                }
+            }
+            return;
+        }
+
+
 
         if (CrossPlatformInputManager.GetButtonDown("Jump")) {
             Vector2 jumpVelocityToAdd = new Vector2(0f, jumpForce);
