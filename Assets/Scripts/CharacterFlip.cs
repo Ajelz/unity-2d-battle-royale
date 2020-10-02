@@ -7,18 +7,16 @@ namespace Assets.HeroEditor.Common.CharacterScripts
     /// </summary>
     public class CharacterFlip : MonoBehaviour
     {
-        TestBar myTestBar;
-        bool isAlive;
+        userHealthbar myUserHealthbar;
         bool isFacingRight;
         Transform myTransform;
         public void Start()
         {
             myTransform = GetComponent<Transform>();
-            isAlive = true;
-            myTestBar = GetComponent<TestBar>();
+            myUserHealthbar = GetComponent<userHealthbar>();
         }
 
-        public bool Direction()
+        public bool Direction() //currently not being used but could be useful
         {
             isFacingRight = true;
             if (myTransform.localScale.x >= 0)
@@ -34,7 +32,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
         public void Update()
         {
-            bool isAlive = myTestBar.LifeStatus();
+            bool isAlive = myUserHealthbar.LifeStatus();
             if (isAlive)
             {
                 var scale = transform.localScale;

@@ -1310,6 +1310,7 @@ GameObject:
   - component: {fileID: 1508436719}
   - component: {fileID: 157134219}
   - component: {fileID: 1379751917}
+  - component: {fileID: 267634612}
   m_Layer: 10
   m_Name: Robin
   m_TagString: Player
@@ -1662,7 +1663,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022153616, y: -0.039177895}
+  m_Offset: {x: -0.022153616, y: -0.036327362}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1673,7 +1674,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8550277, y: 0.20240402}
+  m_Size: {x: 0.8550277, y: 0.19670296}
   m_EdgeRadius: 0
 --- !u!114 &1508436719
 MonoBehaviour:
@@ -1704,9 +1705,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab62741c5460b948990a3ac34ce47dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 0}
 --- !u!60 &1379751917
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1756,6 +1757,21 @@ PolygonCollider2D:
       - {x: 0.7114036, y: 2.2435172}
       - {x: 0.46697843, y: 2.6187863}
       - {x: -0.14092326, y: 2.754256}
+--- !u!114 &267634612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168892492390734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853144804981b940bffd8198c27ee0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHeadPanel: {fileID: 0}
+  mySpriteRenderer: {fileID: 0}
+  mySprites: {fileID: 0}
 --- !u!1 &1179323946161564
 GameObject:
   m_ObjectHideFlags: 0

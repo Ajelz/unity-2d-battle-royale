@@ -10844,6 +10844,7 @@ GameObject:
   - component: {fileID: 865906636}
   - component: {fileID: 865906644}
   - component: {fileID: 8677617792151648148}
+  - component: {fileID: 40466615}
   m_Layer: 10
   m_Name: Grandpa
   m_TagString: Player
@@ -11238,9 +11239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab62741c5460b948990a3ac34ce47dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   maxHealth: 100
   currentHealth: 0
-  healthBar: {fileID: 0}
 --- !u!60 &8677617792151648148
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11287,6 +11288,21 @@ PolygonCollider2D:
       - {x: 0.6834817, y: 2.1044393}
       - {x: 0.46911287, y: 2.4217882}
       - {x: 0.019557953, y: 2.540954}
+--- !u!114 &40466615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168892492390734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e853144804981b940bffd8198c27ee0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myHeadPanel: {fileID: 0}
+  mySpriteRenderer: {fileID: 0}
+  mySprites: {fileID: 0}
 --- !u!1 &1179323946161564
 GameObject:
   m_ObjectHideFlags: 0
