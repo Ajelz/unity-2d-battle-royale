@@ -79,7 +79,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                     return;
             }
 
-            RotateArm(arm, weapon, FixHorizontal ? arm.position + 1000 * Vector3.right : Camera.main.ScreenToWorldPoint(Input.mousePosition), -40, 40);
+            RotateArm(arm, weapon, FixHorizontal ? arm.position + 1000 * Vector3.right : Camera.main.ScreenToWorldPoint(Input.mousePosition), -55, 55); // Arm rotation
         }
 
         /// <summary>

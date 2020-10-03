@@ -79,7 +79,6 @@ public class AnimationTrigger : MonoBehaviour
             if (CrossPlatformInputManager.GetButtonDown("left shift"))
             {
                 myOldAnimator.SetBool("Crouch", true);
-                print("shifting");
             }
             else if (CrossPlatformInputManager.GetButtonUp("left shift"))
             {

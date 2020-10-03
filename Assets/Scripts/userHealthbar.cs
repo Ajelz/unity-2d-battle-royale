@@ -18,6 +18,13 @@ public class userHealthbar : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(5);
+        }
+    }
 
     void Update()
     {
