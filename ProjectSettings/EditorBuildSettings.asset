@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/scenes/Taiga.unity
-    guid: 118e2ed8c1964c44e9f81bd00ea9d737
+    path: Assets/scenes/malik.unity
+    guid: 22b9aef91db1aaf4d8a8a05059436d04
   m_configObjects: {}
