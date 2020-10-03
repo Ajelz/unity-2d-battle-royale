@@ -187,7 +187,7 @@ Camera:
   far clip plane: 1000
   field of view: 39.139565
   orthographic: 1
-  orthographic size: 15.46945
+  orthographic size: 9.958873
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 1211904750}
   - component: {fileID: 1211904749}
   - component: {fileID: 1211904748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -337,6 +337,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7aa39e9e9f5ce3347b32bc8714b37fa5, type: 2}
+    - target: {fileID: 2439572501587075104, guid: 24088921b393be8448b7f236fd0eaa49,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2439572501587075106, guid: 24088921b393be8448b7f236fd0eaa49,
         type: 3}
       propertyPath: m_Name
@@ -346,6 +351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpForce
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2439572501587075292, guid: 24088921b393be8448b7f236fd0eaa49,
+        type: 3}
+      propertyPath: groundLayerMask.m_Bits
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 2439572501587075293, guid: 24088921b393be8448b7f236fd0eaa49,
         type: 3}
@@ -402,7 +412,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3066756853310082123, guid: 24088921b393be8448b7f236fd0eaa49, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 24088921b393be8448b7f236fd0eaa49, type: 3}
 --- !u!1001 &3067700771076293546
 PrefabInstance:
@@ -411,6 +422,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3067700770889505322, guid: 0d342ad4e75b6574f97fd8a577a6e702,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067700771123486689, guid: 0d342ad4e75b6574f97fd8a577a6e702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067700771641242619, guid: 0d342ad4e75b6574f97fd8a577a6e702,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 3067700772187251312, guid: 0d342ad4e75b6574f97fd8a577a6e702,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -470,6 +496,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: house
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067700772205080189, guid: 0d342ad4e75b6574f97fd8a577a6e702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067700772532172135, guid: 0d342ad4e75b6574f97fd8a577a6e702,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d342ad4e75b6574f97fd8a577a6e702, type: 3}
