@@ -23,6 +23,8 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         public Transform ArmR;
         public GameObject Shell;
         public ParticleSystem FireMuzzle;
+        Transform myOldFeetParent;
+        BoxCollider2D myOldFeet;
 
         private bool _fire;
         private float _fireTime;
@@ -34,9 +36,15 @@ namespace Assets.HeroEditor.Common.CharacterScripts
         [HideInInspector] public bool FireButtonPressed;
         [HideInInspector] public bool FireButtonUp;
 
+        public void Start()
+        {
+            myOldFeet = GetComponent<BoxCollider2D>();
+            myOldFeetParent = transform.parent.parent.parent.parent.parent.parent.parent;
+            myOldFeet = myOldFeetParent.GetComponent<BoxCollider2D>();
+        }
         public void Update()
         {
-			if (Character.WeaponType != WeaponType.Firearms1H && Character.WeaponType != WeaponType.Firearms2H) return;
+            if (Character.WeaponType != WeaponType.Firearms1H && Character.WeaponType != WeaponType.Firearms2H) return;
 
             if (Character.Firearm.Params.AutomaticFire ? FireButtonPressed : FireButtonDown)
             {
@@ -169,6 +177,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 
         private void CreateBullet() // TODO: Preload and caching prefabs is recommended to improve game performance
         {
+
             if (SceneManager.GetActiveScene().name.Contains("CharacterEditor")) return; // Don't create bullets in editor scene
 
 	        var iterations = 1;
@@ -193,7 +202,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                 var bullet = Instantiate(Character.Firearm.Params.ProjectilePrefab, Character.Firearm.FireTransform);
                 var spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
 
-                if (CrossPlatformInputManager.GetButton("left shift"))
+                if (CrossPlatformInputManager.GetButton("left shift") && (myOldFeet.IsTouchingLayers(LayerMask.GetMask("Ground"))))
                 {
                     spread = Character.Firearm.FireTransform.up * Random.Range(-0.25f, 0.25f) * (1 - Character.Firearm.Params.Accuracy); // CONTROLLED SPREAD BULLETS
                 }
@@ -202,7 +211,9 @@ namespace Assets.HeroEditor.Common.CharacterScripts
                     spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
                 }
                 else
+                {
                     spread = Character.Firearm.FireTransform.up * Random.Range(-1f, 1f) * (1 - Character.Firearm.Params.Accuracy);
+                }
 
                 bullet.transform.localPosition = Vector3.zero;
                 bullet.transform.localRotation = Quaternion.identity;

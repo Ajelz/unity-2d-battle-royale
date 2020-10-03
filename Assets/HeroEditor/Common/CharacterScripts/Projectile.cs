@@ -23,20 +23,28 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 		   if (myRigidbody != null)
 		   {
                 transform.right = myRigidbody.velocity.normalized;
-                transform.Translate(Vector2.right.normalized * 0.1f); //edit the multiplied number to control bullet speed (recommended (0.1f-0.05f)
+                transform.Translate(Vector2.right.normalized * 0.4f); //edit the multiplied number to control bullet speed (recommended (0.1f-0.05f)
             }
 	    }
 
+        //BULLET COLLISION DAMAGE
         public void OnTriggerEnter2D(Collider2D other)
         {
+            Vector3 bulletDir = this.gameObject.transform.forward;
+            bulletDir.y = 0;
+            float force = 500;
+
+            other.GetComponent<Rigidbody2D>().AddForce(bulletDir.normalized * force);
             Bang(other.gameObject);
-            if (other.gameObject.CompareTag("Player")) // THIS BULLET DEALS 5 DAMAGE
+            if (other.gameObject.CompareTag("Object"))
+            {
+                other.GetComponent<Rigidbody2D>().AddForce(new Vector2(force, 0), ForceMode2D.Impulse);
+            }
+            if (other.gameObject.CompareTag("Player"))
             {
                 userHeadPanel myUserHeadPanel = other.GetComponent<userHeadPanel>();
                 userHealthbar myUserHealthbar = other.GetComponent<userHealthbar>();
                 myUserHeadPanel.TriggerHeadPanel();
-                myUserHealthbar.TakeDamage(5);
-
             }
             //print("banged yes?" + other.gameObject);
         }

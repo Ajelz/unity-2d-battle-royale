@@ -1663,7 +1663,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022153616, y: -0.036327362}
+  m_Offset: {x: -0.026052237, y: 0.0065914094}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1674,7 +1674,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8550277, y: 0.19670296}
+  m_Size: {x: 0.8266568, y: 0.25474936}
   m_EdgeRadius: 0
 --- !u!114 &1508436719
 MonoBehaviour:
@@ -1740,10 +1740,10 @@ PolygonCollider2D:
       - {x: -0.6163373, y: 0.76480055}
       - {x: -0.4882934, y: 0.66606593}
       - {x: -0.42935026, y: 0.54392004}
-      - {x: -0.43081307, y: 0.07064462}
-      - {x: -0.26500416, y: 0.07051563}
-      - {x: 0.14802563, y: 0.068696976}
-      - {x: 0.37194347, y: 0.06762457}
+      - {x: -0.4393618, y: 0.1324985}
+      - {x: -0.26965487, y: 0.13309011}
+      - {x: 0.112733245, y: 0.13255873}
+      - {x: 0.38728642, y: 0.13180569}
       - {x: 0.39554667, y: 0.5909302}
       - {x: 0.5018884, y: 0.6445408}
       - {x: 0.50626814, y: 0.8024645}
@@ -2740,7 +2740,7 @@ GameObject:
   - component: {fileID: 212459600829180518}
   m_Layer: 10
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4217,7 +4217,7 @@ GameObject:
   - component: {fileID: 210248878303901118}
   m_Layer: 10
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
