@@ -8,9 +8,13 @@ public class NewPlayer : MonoBehaviour
     // 1. Config - always put config (anything to do with before starting playing)
     [SerializeField] float runSpeed = 20f;
     [SerializeField] float jumpForce = 35f;
-    [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] LayerMask groundLayerMask;
+    [SerializeField] Camera cam;
+    [SerializeField] Transform weaponPivot;
 
-    //2. State -  
+    //2. State
+    Vector2 mousePos;
+    Vector2 weaponDirection;
 
     //3. Cache component references
     Rigidbody2D objectRigidbody2D;
@@ -31,8 +35,8 @@ public class NewPlayer : MonoBehaviour
     {
         move();
         jump();
-        objectFlip();
         objectAnimation();
+        weponToMouse();
     }
 
     private void move(){
@@ -46,9 +50,17 @@ public class NewPlayer : MonoBehaviour
         }
     }
 
-    private void objectFlip(){
-        if(objectRigidbody2D.velocity.x > 0) transform.eulerAngles = new Vector3(0, 0, 0);
-        else if(objectRigidbody2D.velocity.x < 0) transform.eulerAngles = new Vector3(0, 180, 0);
+    private void weponToMouse(){
+        mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        weaponDirection = mousePos - (Vector2)weaponPivot.position;
+        float angle = Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg;
+        if(mousePos.x < transform.position.x){
+            transform.eulerAngles = new Vector3(0, 180, 0);
+            weaponPivot.rotation = Quaternion.Euler(180, 0, -angle);
+        }else{
+            weaponPivot.rotation = Quaternion.Euler(0, 0, angle);
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        } 
     }
 
     private void objectAnimation(){
