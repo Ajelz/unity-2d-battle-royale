@@ -7,7 +7,7 @@ public class NewPlayer : MonoBehaviour
 {
     // 1. Config - always put config (anything to do with before starting playing)
     [SerializeField] float runSpeed = 20f;
-    [SerializeField] float jumpForce = 30f;
+    [SerializeField] float jumpForce = 35f;
 
     //2. State -  
     public bool isOnFloor = false;
