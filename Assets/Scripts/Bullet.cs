@@ -15,12 +15,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        bool isFacingRight = cfp.Direction();
-        if (isFacingRight)
-        {
-            rb.velocity = transform.right * speed;
-        }
-        else rb.velocity = (transform.right * -1) * speed;
+        rb.velocity = transform.right.normalized * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)

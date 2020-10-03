@@ -7,6 +7,10 @@ TagManager:
   - theParent
   - Bullet
   - Ground
+  - Body
+  - Head
+  - Object
+  - House
   layers:
   - Default
   - TransparentFX
@@ -56,8 +60,14 @@ TagManager:
   - name: Environment
     uniqueID: 3717421697
     locked: 0
+  - name: Inner
+    uniqueID: 1518252597
+    locked: 0
   - name: Player
     uniqueID: 1062098265
+    locked: 0
+  - name: Outer
+    uniqueID: 1241124795
     locked: 0
   - name: Foreground
     uniqueID: 2676590473
