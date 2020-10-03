@@ -6,9 +6,7 @@ TagManager:
   tags:
   - theParent
   - Bullet
-  - Head
-  - Body
-  - Object
+  - Ground
   layers:
   - Default
   - TransparentFX

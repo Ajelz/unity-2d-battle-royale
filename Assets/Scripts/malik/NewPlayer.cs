@@ -6,19 +6,17 @@ using UnityStandardAssets.CrossPlatformInput;
 public class NewPlayer : MonoBehaviour
 {
     // 1. Config - always put config (anything to do with before starting playing)
-    [SerializeField] float runSpeed = 8f;
-    [SerializeField] float jumpForce = 20f;
+    [SerializeField] float runSpeed = 20f;
+    [SerializeField] float jumpForce = 30f;
 
     //2. State -  
-    bool isOnFloor = false;
-    // bool isAlive = true;              /* commenting this because it makes a warning */
+    public bool isOnFloor = false;
 
     //3. Cache component references
     Rigidbody2D objectRigidbody2D;
     CapsuleCollider2D objectCapsuleCollider2D;
     BoxCollider2D objectBoxCollider2D;
     Animator objectAnimator;
-    SpriteRenderer objectSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +25,6 @@ public class NewPlayer : MonoBehaviour
         objectCapsuleCollider2D = GetComponent<CapsuleCollider2D>();
         objectBoxCollider2D = GetComponent<BoxCollider2D>();
         objectAnimator = GetComponent<Animator>();
-        objectSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -35,37 +32,40 @@ public class NewPlayer : MonoBehaviour
     {
         move();
         jump();
-        objectAnimation();
         objectFlip();
     }
 
     private void move(){
         float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal");
         objectRigidbody2D.velocity = new Vector2(controlThrow * runSpeed, objectRigidbody2D.velocity.y);
+
+        // for running animation
+        if (CrossPlatformInputManager.GetButton("left")) objectAnimator.SetBool("isRunning", true);
+        else if (CrossPlatformInputManager.GetButton("right")) objectAnimator.SetBool("isRunning", true);
+        else objectAnimator.SetBool("isRunning", false);
     }
 
     private void jump(){
         if (CrossPlatformInputManager.GetButtonDown("Jump") && isOnFloor) {
             objectRigidbody2D.velocity += new Vector2(0f, jumpForce);
             isOnFloor = false;
+
+            // for jumping animation
+            objectAnimator.SetBool("isJumping", true);
         }
     }
 
-    private void objectAnimation(){
-        bool playerHasHorizontalSpeed = Mathf.Abs(CrossPlatformInputManager.GetAxis("Horizontal")) > Mathf.Epsilon;
-        if (playerHasHorizontalSpeed) objectAnimator.SetBool("running", true); //playerHasHorizontalSpeed will either be true or false, therefore triggering the animation
-        else objectAnimator.SetBool("running", false);
-    }
-
     private void objectFlip(){
-        if(objectRigidbody2D.velocity.x > 0) objectSpriteRenderer.flipX = false;
-        else if(objectRigidbody2D.velocity.x < 0) objectSpriteRenderer.flipX = true;
+        if(objectRigidbody2D.velocity.x > 0) transform.eulerAngles = new Vector3(0, 0, 0);
+        else if(objectRigidbody2D.velocity.x < 0) transform.eulerAngles = new Vector3(0, 180, 0);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        print(other.gameObject.name);
-        if(other.gameObject.name == "Floor"){
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.tag == "Ground"){
             isOnFloor = true;
+
+            // for jumping animation
+            objectAnimator.SetBool("isJumping", false);
         }
     }
 }
