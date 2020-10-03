@@ -36,7 +36,7 @@ public class NewPlayer : MonoBehaviour
         move();
         jump();
         objectAnimation();
-        weponToMouse();
+        weaponToMouse();
     }
 
     private void move(){
@@ -50,24 +50,41 @@ public class NewPlayer : MonoBehaviour
         }
     }
 
-    private void weponToMouse(){
+    private void weaponToMouse(){
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         weaponDirection = mousePos - (Vector2)weaponPivot.position;
         float angle = Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg;
         if(mousePos.x < transform.position.x){
             transform.eulerAngles = new Vector3(0, 180, 0);
-            weaponPivot.rotation = Quaternion.Euler(180, 0, -angle);
+            weaponPivot.transform.eulerAngles = new Vector3(180, 0, -angle);
         }else{
-            weaponPivot.rotation = Quaternion.Euler(0, 0, angle);
             transform.eulerAngles = new Vector3(0, 0, 0);
-        } 
+            weaponPivot.transform.eulerAngles = new Vector3(0, 0, angle);
+        }
     }
 
     private void objectAnimation(){
         // for running animation
-        if (CrossPlatformInputManager.GetButton("left")) objectAnimator.SetBool("isRunning", true);
-        else if (CrossPlatformInputManager.GetButton("right")) objectAnimator.SetBool("isRunning", true);
-        else objectAnimator.SetBool("isRunning", false);
+        if (CrossPlatformInputManager.GetButton("left") && transform.localRotation.eulerAngles.y == 180) {
+            objectAnimator.SetBool("isRunning", true);
+            objectAnimator.SetBool("isRunningBackwards", false);
+        }
+        else if (CrossPlatformInputManager.GetButton("right") && transform.localRotation.eulerAngles.y == 0){
+            objectAnimator.SetBool("isRunning", true);
+            objectAnimator.SetBool("isRunningBackwards", false);
+        }
+        else if (CrossPlatformInputManager.GetButton("left") && transform.localRotation.eulerAngles.y == 0){
+            objectAnimator.SetBool("isRunningBackwards", true);
+            objectAnimator.SetBool("isRunning", false);
+        }
+        else if (CrossPlatformInputManager.GetButton("right") && transform.localRotation.eulerAngles.y == 180){
+            objectAnimator.SetBool("isRunningBackwards", true);
+            objectAnimator.SetBool("isRunning", false);
+        }
+        else {
+            objectAnimator.SetBool("isRunning", false);
+            objectAnimator.SetBool("isRunningBackwards", false);
+        }
 
         // for jump animation
         if (CrossPlatformInputManager.GetButtonDown("Jump")) objectAnimator.SetBool("isJumping", true);
