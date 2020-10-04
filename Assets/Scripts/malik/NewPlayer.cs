@@ -9,6 +9,8 @@ public class NewPlayer : MonoBehaviour
     [SerializeField] float runSpeed = 20f;
     [SerializeField] float jumpForce = 35f;
     [SerializeField] LayerMask groundLayerMask;
+
+    // for weaponToMouse function
     [SerializeField] Camera cam;
     [SerializeField] Transform weaponPivot;
 
@@ -54,6 +56,7 @@ public class NewPlayer : MonoBehaviour
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         weaponDirection = mousePos - (Vector2)weaponPivot.position;
         float angle = Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg;
+        print(angle);
         if(mousePos.x < transform.position.x){
             transform.eulerAngles = new Vector3(0, 180, 0);
             weaponPivot.transform.eulerAngles = new Vector3(180, 0, -angle);
