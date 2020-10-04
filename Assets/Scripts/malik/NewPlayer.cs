@@ -56,13 +56,25 @@ public class NewPlayer : MonoBehaviour
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         weaponDirection = mousePos - (Vector2)weaponPivot.position;
         float angle = Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg;
-        print(angle);
         if(mousePos.x < transform.position.x){
             transform.eulerAngles = new Vector3(0, 180, 0);
-            weaponPivot.transform.eulerAngles = new Vector3(180, 0, -angle);
+            weaponPivot.transform.eulerAngles = new Vector3(180, 0, customClamp(-angle, mousePos.y));
         }else{
             transform.eulerAngles = new Vector3(0, 0, 0);
-            weaponPivot.transform.eulerAngles = new Vector3(0, 0, angle);
+            weaponPivot.transform.eulerAngles = new Vector3(0, 0, Mathf.Clamp(angle, -50, 50));
+        }
+    }
+    
+    // this function is for weaponToMouse function
+    private float customClamp(float value, float mousey){
+        if(value >= -130 && value <= -90) return -130;
+        else if(value <= -130 && value >= -180) return value;
+        else if(value <= 180 && value >= 130) return value;
+        else if(value <= 130 && value >= 90) return 130;
+        else{
+            if(Mathf.Sign(mousey) == 1) return -130;
+            else if(Mathf.Sign(mousey) == -1) return 130;
+            else return value;
         }
     }
 
