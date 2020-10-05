@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 public class NewPlayer : MonoBehaviour
 {
@@ -42,12 +41,12 @@ public class NewPlayer : MonoBehaviour
     }
 
     private void move(){
-        float controlThrow = CrossPlatformInputManager.GetAxis("Horizontal");
+        float controlThrow = Input.GetAxis("Horizontal");
         objectRigidbody2D.velocity = new Vector2(controlThrow * runSpeed * Time.deltaTime * 50, objectRigidbody2D.velocity.y);
     }
 
     private void jump(){
-        if (CrossPlatformInputManager.GetButtonDown("Jump") && isGrounded()) {
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded()) {
             objectRigidbody2D.velocity += new Vector2(0f, jumpForce);
         }
     }
@@ -76,19 +75,19 @@ public class NewPlayer : MonoBehaviour
 
     private void objectAnimation(){
         // for running animation
-        if (CrossPlatformInputManager.GetButton("left") && transform.localRotation.eulerAngles.y == 180) {
+        if (Input.GetKey(KeyCode.A) && transform.localRotation.eulerAngles.y == 180) {
             objectAnimator.SetBool("isRunning", true);
             objectAnimator.SetBool("isRunningBackwards", false);
         }
-        else if (CrossPlatformInputManager.GetButton("right") && transform.localRotation.eulerAngles.y == 0){
+        else if (Input.GetKey(KeyCode.D) && transform.localRotation.eulerAngles.y == 0){
             objectAnimator.SetBool("isRunning", true);
             objectAnimator.SetBool("isRunningBackwards", false);
         }
-        else if (CrossPlatformInputManager.GetButton("left") && transform.localRotation.eulerAngles.y == 0){
+        else if (Input.GetKey(KeyCode.A) && transform.localRotation.eulerAngles.y == 0){
             objectAnimator.SetBool("isRunningBackwards", true);
             objectAnimator.SetBool("isRunning", false);
         }
-        else if (CrossPlatformInputManager.GetButton("right") && transform.localRotation.eulerAngles.y == 180){
+        else if (Input.GetKey(KeyCode.D) && transform.localRotation.eulerAngles.y == 180){
             objectAnimator.SetBool("isRunningBackwards", true);
             objectAnimator.SetBool("isRunning", false);
         }
@@ -98,13 +97,9 @@ public class NewPlayer : MonoBehaviour
         }
 
         // for jump animation
-        if (CrossPlatformInputManager.GetButtonDown("Jump")) objectAnimator.SetBool("isJumping", true);
+        if (Input.GetKeyDown(KeyCode.W)) objectAnimator.SetBool("isJumping", true);
         else if (!isGrounded()) objectAnimator.SetBool("isJumping", true);
         else if (isGrounded()) objectAnimator.SetBool("isJumping", false);
-
-        // for m416 animation
-        if(CrossPlatformInputManager.GetButton("Fire1")) objectAnimator.SetBool("isShooting", true);
-        else objectAnimator.SetBool("isShooting", false);
     }
 
     private bool isGrounded(){
