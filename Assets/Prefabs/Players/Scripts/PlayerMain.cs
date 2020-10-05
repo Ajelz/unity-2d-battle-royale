@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewPlayer : MonoBehaviour
+public class PlayerMain : MonoBehaviour
 {
     // 1. Config - always put config (anything to do with before starting playing)
     [SerializeField] float runSpeed = 20f;
