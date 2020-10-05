@@ -23,7 +23,7 @@ namespace Assets.HeroEditor.Common.CharacterScripts
 		   if (myRigidbody != null)
 		   {
                 transform.right = myRigidbody.velocity.normalized;
-                transform.Translate(Vector2.right.normalized * 0.4f); //edit the multiplied number to control bullet speed (recommended (0.1f-0.05f)
+                transform.Translate(Vector2.right.normalized * 3f); //edit the multiplied number to control bullet speed (recommended (0.1f-0.05f)
             }
 	    }
 

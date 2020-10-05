@@ -1026,7 +1026,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 20
   jumpForce: 30
-  isOnFloor: 0
 --- !u!114 &2439572501587075105
 MonoBehaviour:
   m_ObjectHideFlags: 0
