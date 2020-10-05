@@ -36,7 +36,6 @@ public class PlayerMain : MonoBehaviour
     {
         move();
         jump();
-        objectAnimation();
         weaponToMouse();
     }
 
@@ -71,35 +70,6 @@ public class PlayerMain : MonoBehaviour
         else if(value <= 180 && value >= 130) return value;
         else if(value <= 130 && value >= 90) return 130;
         return value;
-    }
-
-    private void objectAnimation(){
-        // for running animation
-        if (Input.GetKey(KeyCode.A) && transform.localRotation.eulerAngles.y == 180) {
-            objectAnimator.SetBool("isRunning", true);
-            objectAnimator.SetBool("isRunningBackwards", false);
-        }
-        else if (Input.GetKey(KeyCode.D) && transform.localRotation.eulerAngles.y == 0){
-            objectAnimator.SetBool("isRunning", true);
-            objectAnimator.SetBool("isRunningBackwards", false);
-        }
-        else if (Input.GetKey(KeyCode.A) && transform.localRotation.eulerAngles.y == 0){
-            objectAnimator.SetBool("isRunningBackwards", true);
-            objectAnimator.SetBool("isRunning", false);
-        }
-        else if (Input.GetKey(KeyCode.D) && transform.localRotation.eulerAngles.y == 180){
-            objectAnimator.SetBool("isRunningBackwards", true);
-            objectAnimator.SetBool("isRunning", false);
-        }
-        else {
-            objectAnimator.SetBool("isRunning", false);
-            objectAnimator.SetBool("isRunningBackwards", false);
-        }
-
-        // for jump animation
-        if (Input.GetKeyDown(KeyCode.W)) objectAnimator.SetBool("isJumping", true);
-        else if (!isGrounded()) objectAnimator.SetBool("isJumping", true);
-        else if (isGrounded()) objectAnimator.SetBool("isJumping", false);
     }
 
     private bool isGrounded(){
